@@ -3,18 +3,15 @@ package com.lw.server.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lw.mapper.FieidMapper;
-import com.lw.mapper.UserMapper;
 import com.lw.pojo.Fieid;
-import com.lw.pojo.User;
+import com.lw.pojo.dto.UpdateFieidDTO;
 import com.lw.public_parameter.PublicParameter;
 import com.lw.server.FieidServer;
-import com.lw.server.UserServer;
-import com.lw.utils.AccountUtil;
 import com.lw.utils.JSONObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,9 +52,33 @@ public class FieidServerImpl implements FieidServer {
     @Override
     public int deleteFieidById(Integer id) {
         try {
-            System.err.println(id);
             return fieidMapper.deleteFieidById(id);
         }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public ModelAndView queryFieidById(Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        try {
+            modelAndView.addObject("fieid", fieidMapper.queryFieidById(id));
+            modelAndView.setViewName("/fieid/editFieid");
+            return modelAndView;
+        } catch (Exception e){
+            e.printStackTrace();
+            modelAndView.setViewName("/error/error");
+            return modelAndView;
+        }
+    }
+
+    @Override
+    public int updateFieidById(UpdateFieidDTO param) {
+        try {
+            return fieidMapper.updateFieidById(param);
+        } catch (Exception e){
             e.printStackTrace();
             return 0;
         }

@@ -28,7 +28,7 @@ public class AccountUtil implements InitializingBean {
         ACCOUNT_LIST = userMapper.queryAllUserAccount();
     }
 
-
+    // todo 注册时候加
     public void addAccount(String account){
         ACCOUNT_LIST.add(account);
     }

@@ -54,30 +54,29 @@
          * 修改场地信息
          */
         function updateFieid(data) {
-            layer.confirm('你确定要修改场地信息？', {
-                btn: ['YES','NO'] //按钮
-            }, function(index){
-                layer.close(index);
+            // layer.confirm('你确定要修改场地信息？', {
+            //     btn: ['YES','NO'] //按钮
+            // }, function(index){
+            //     layer.close(index);
 
-                $.ajax({
-                    url:'/fieid/queryFieidById',
-                    type:'post',
-                    data:{id : data.id},
-                    success:function (response) {
-                        // if(0 == response){
-                        //     layer.error("DELETE ERROR");
-                        // }else{
-                        //     table.reload("fieidList");
-                        //     layer.msg("DELETE SUCCESS");
-                        // }
-                    },error:function () {
-                        layer.error("SYSTEM ERROR !!!");
-                    }
-                });
+            layer.open({
+                title : '编辑场地信息',
+                type : 2,
+                area : [ '62%', '80%' ],
+                maxmin : true,
+                shadeClose : true,
+                content : '/fieid/queryFieidById?id='+data.id,
+                shade : 0, // 不显示遮罩
 
-            }, function(){
-                layer.close();
+                success : function(layero, index) {
+                    layer.iframeAuto(index);
+                    console.log(data)
+                }
             });
+            //
+            // }, function(){
+            //     layer.close();
+            // });
         }
 
 

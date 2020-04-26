@@ -2,15 +2,13 @@ package com.lw.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lw.pojo.Fieid;
+import com.lw.pojo.dto.UpdateFieidDTO;
 import com.lw.server.FieidServer;
-import com.lw.server.UserServer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("fieid")
@@ -47,6 +45,19 @@ public class FieidController {
     @RequestMapping("deleteFieidById")
     public int deleteFieidById(Integer id){
         return fieidServer.deleteFieidById(id);
+    }
+
+    /**
+     *  回显场地信息
+     */
+    @RequestMapping("queryFieidById")
+    public ModelAndView queryFieidById(Integer id){
+        return fieidServer.queryFieidById(id);
+    }
+
+    @RequestMapping("updateFieid")
+    public int updateFieid(UpdateFieidDTO param){
+        return fieidServer.updateFieidById(param);
     }
 
 

@@ -1,8 +1,11 @@
 package com.lw.server;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lw.controller.FieidController;
 import com.lw.pojo.Fieid;
 import com.lw.pojo.User;
+import com.lw.pojo.dto.UpdateFieidDTO;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -13,4 +16,8 @@ public interface FieidServer {
     int saveFieid(Fieid param);
 
     int deleteFieidById(Integer id);
+
+    ModelAndView queryFieidById(Integer id);
+
+    int updateFieidById(UpdateFieidDTO param);
 }
