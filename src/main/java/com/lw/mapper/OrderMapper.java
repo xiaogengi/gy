@@ -1,10 +1,7 @@
 package com.lw.mapper;
 
 import com.lw.pojo.Order;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -22,4 +19,7 @@ public interface OrderMapper {
             " (#{param.userId}, #{param.fieid}, #{param.startTime}, #{param.endTime}, #{param.gyDate})")
     int saveOrder(@Param("param") Order param);
 
+
+    @Delete("delete from `order` where id = #{id}")
+    int deleteOrderById(@Param("id") Integer id);
 }

@@ -11,4 +11,6 @@ public interface FieidServer {
     JSONObject queryAllFieid();
 
     int saveFieid(Fieid param);
+
+    int deleteFieidById(Integer id);
 }

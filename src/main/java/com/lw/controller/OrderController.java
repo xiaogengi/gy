@@ -3,6 +3,7 @@ package com.lw.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.lw.pojo.Order;
 import com.lw.pojo.User;
+import com.lw.server.FieidServer;
 import com.lw.server.OrderServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,16 @@ public class OrderController {
         return orderServer.queryAllOrder();
     }
 
+
+
+
+    /**
+     *  删除预约信息
+     */
+    @RequestMapping("deleteOrderById")
+    public int deleteOrderById(Integer id){
+        return orderServer.deleteOrderById(id);
+    }
 
 
     /**

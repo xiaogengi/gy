@@ -54,6 +54,15 @@ public class UserServerImpl implements UserServer {
         }
     }
 
+    @Override
+    public int deleteUserById(Integer id) {
+        try {
+            return userMapper.deleteUserById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 
 }

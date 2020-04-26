@@ -52,6 +52,16 @@ public class FieidServerImpl implements FieidServer {
         }
     }
 
+    @Override
+    public int deleteFieidById(Integer id) {
+        try {
+            System.err.println(id);
+            return fieidMapper.deleteFieidById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 
 }

@@ -39,4 +39,14 @@ public class OrderServerImpl implements OrderServer {
             return PublicParameter.JSON_OBJECT;
         }
     }
+
+    @Override
+    public int deleteOrderById(Integer id) {
+        try {
+            return orderMapper.deleteOrderById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

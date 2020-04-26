@@ -6,6 +6,7 @@ import com.lw.server.UserServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -35,7 +36,24 @@ public class UserController {
         return userServer.queryAllUser();
     }
 
+    /**
+     *  删除 用户 信息
+     */
+    @RequestMapping("deleteOrderById")
+    public int deleteOrderById(Integer id){
+        return userServer.deleteUserById(id);
+    }
 
+
+    /**
+     * 打开 user 主页面
+     */
+    @RequestMapping("userList")
+    public ModelAndView orderList(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/user/userList");
+        return modelAndView;
+    }
 
 
 }

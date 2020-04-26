@@ -1,10 +1,7 @@
 package com.lw.mapper;
 
 import com.lw.pojo.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -21,4 +18,7 @@ public interface UserMapper {
 
     @Select("select user_account from user")
     List<String> queryAllUserAccount();
+
+    @Delete("delete from `user` where user_id = #{id}")
+    int deleteUserById(@Param("id") Integer id);
 }

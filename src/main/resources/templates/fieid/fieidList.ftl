@@ -9,8 +9,8 @@
     <!-- 预约列表 &ndash;&gt; -->
     <table id="fieidList" lay-filter="test" lay-data="{height: 'full-20', cellMinWidth: 80}" ></table>
 
-
-<script src="/layui.js"></script>
+　　<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="/layui.js"></script>
 <script>
 
     layui.use('table', function(){
@@ -50,13 +50,66 @@
         });
 
 
+        /**
+         * 修改场地信息
+         */
         function updateFieid(data) {
-            alert(data.id);
+            layer.confirm('你确定要修改场地信息？', {
+                btn: ['YES','NO'] //按钮
+            }, function(index){
+                layer.close(index);
+
+                $.ajax({
+                    url:'/fieid/queryFieidById',
+                    type:'post',
+                    data:{id : data.id},
+                    success:function (response) {
+                        // if(0 == response){
+                        //     layer.error("DELETE ERROR");
+                        // }else{
+                        //     table.reload("fieidList");
+                        //     layer.msg("DELETE SUCCESS");
+                        // }
+                    },error:function () {
+                        layer.error("SYSTEM ERROR !!!");
+                    }
+                });
+
+            }, function(){
+                layer.close();
+            });
         }
 
 
+        /**
+         * 删除场地信息
+         * @param data
+         */
         function deleteFieid(data) {
+            layer.confirm('你确定要删除场地信息？', {
+                btn: ['YES','NO'] //按钮
+            }, function(index){
+                layer.close(index);
 
+                $.ajax({
+                    url:'/fieid/deleteFieidById',
+                    type:'post',
+                    data:{id : data.id},
+                    success:function (response) {
+                        if(0 == response){
+                            layer.error("DELETE ERROR");
+                        }else{
+                            table.reload("fieidList");
+                            layer.msg("DELETE SUCCESS");
+                        }
+                    },error:function () {
+                        layer.error("SYSTEM ERROR !!!");
+                    }
+                });
+
+            }, function(){
+                layer.close();
+            });
         }
 
     });

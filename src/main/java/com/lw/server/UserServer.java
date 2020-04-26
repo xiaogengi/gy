@@ -9,4 +9,7 @@ public interface UserServer {
     List<User> queryAllUser();
 
     int saveUser(User param);
+
+    int deleteUserById(Integer id);
+
 }

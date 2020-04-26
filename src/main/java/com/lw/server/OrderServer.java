@@ -10,4 +10,7 @@ public interface OrderServer{
     int saveOrder(Order param);
 
     JSONObject queryAllOrder();
+
+    int deleteOrderById(Integer id);
+
 }

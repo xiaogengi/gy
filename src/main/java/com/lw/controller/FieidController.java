@@ -42,6 +42,15 @@ public class FieidController {
 
 
     /**
+     *  删除场地信息
+     */
+    @RequestMapping("deleteFieidById")
+    public int deleteFieidById(Integer id){
+        return fieidServer.deleteFieidById(id);
+    }
+
+
+    /**
      * 打开 field 主页面
      */
     @RequestMapping("fieidList")
@@ -50,5 +59,6 @@ public class FieidController {
         modelAndView.setViewName("/fieid/fieidList");
         return modelAndView;
     }
+
 
 }
