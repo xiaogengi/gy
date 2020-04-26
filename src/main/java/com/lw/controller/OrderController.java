@@ -1,11 +1,13 @@
 package com.lw.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lw.pojo.Order;
 import com.lw.pojo.User;
 import com.lw.server.OrderServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -31,10 +33,21 @@ public class OrderController {
      * @return
      */
     @RequestMapping("queryAllOrder")
-    public List<Order> queryAllOrder(){
+    public JSONObject queryAllOrder(){
         return orderServer.queryAllOrder();
     }
 
+
+
+    /**
+     * 打开 order 主页面
+     */
+    @RequestMapping("orderList")
+    public ModelAndView orderList(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/order/orderList");
+        return modelAndView;
+    }
 
 
 

@@ -2,12 +2,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>场地列表</title>
+    <title>预约列表</title>
     <link rel="stylesheet" href="/css/layui.css">
 </head>
 <body>
     <!-- 预约列表 &ndash;&gt; -->
-    <table id="fieidList" lay-filter="test" lay-data="{height: 'full-20', cellMinWidth: 80}" ></table>
+    <table id="orderList" lay-filter="test" lay-data="{height: 'full-20', cellMinWidth: 80}" ></table>
 
 
 <script src="/layui.js"></script>
@@ -18,14 +18,16 @@
 
         //第一个实例
         table.render({
-            elem: '#fieidList'
+            elem: '#orderList'
             //,height: 'full-200'
             //,toolbar: '#toolbarDemo'
-            ,url: '/fieid/queryAllFieid' //数据接口
+            ,url: '/order/queryAllOrder' //数据接口
             ,page: false //开启分页
             ,cols: [[ //表头
                  {field: 'id', title: 'ID', fixed: 'left'}
-                ,{field: 'name', title: '场地名称'}
+                ,{field: 'startTime', title: '预约开始时间'}
+                ,{field: 'endTime', title: '预约结束时间'}
+                ,{field: 'gyDate', title: '预约日期'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
                 // ,{field: '', title: '性别', width:80, sort: true}
                 // ,{field: 'city', title: '城市', width:80}

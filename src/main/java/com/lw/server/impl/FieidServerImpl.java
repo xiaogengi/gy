@@ -10,6 +10,7 @@ import com.lw.public_parameter.PublicParameter;
 import com.lw.server.FieidServer;
 import com.lw.server.UserServer;
 import com.lw.utils.AccountUtil;
+import com.lw.utils.JSONObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +28,7 @@ public class FieidServerImpl implements FieidServer {
     public JSONObject queryAllFieid() {
         try {
             List<Fieid> fieids = fieidMapper.queryAllFieid();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("code",0);
-            jsonObject.put("count",fieids.size());
-            jsonObject.put("data",fieids);
-            return jsonObject;
+            return JSONObjectUtil.jsonUtil(fieids);
         } catch (Exception e){
             e.printStackTrace();
             return PublicParameter.JSON_OBJECT;

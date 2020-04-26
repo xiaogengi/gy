@@ -8,9 +8,9 @@ public class Order {
     private Integer id;
     private Integer userId;
     private Integer fieid;
-    private String startTime;
-    private String endTime;
-    private String gyDate;
+    private String startTime; //hh:ss
+    private String endTime;   //hh:ss
+    private String gyDate;    //yyyy-mm-ss
 
     public Integer getId() {
         return id;

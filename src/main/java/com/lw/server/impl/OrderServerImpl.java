@@ -1,9 +1,12 @@
 package com.lw.server.impl;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.lw.mapper.OrderMapper;
 import com.lw.pojo.Order;
+import com.lw.public_parameter.PublicParameter;
 import com.lw.server.OrderServer;
+import com.lw.utils.JSONObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +30,13 @@ public class OrderServerImpl implements OrderServer {
     }
 
     @Override
-    public List<Order> queryAllOrder() {
+    public JSONObject queryAllOrder() {
         try {
-            return orderMapper.queryAllOrder();
+            List<Order> orders = orderMapper.queryAllOrder();
+            return JSONObjectUtil.jsonUtil(orders);
         } catch (Exception e){
             e.printStackTrace();
-            return new ArrayList<>();
+            return PublicParameter.JSON_OBJECT;
         }
     }
 }

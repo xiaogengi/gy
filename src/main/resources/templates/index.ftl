@@ -48,7 +48,7 @@
                     <a href="javascript:;">预约管理</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a data-url="/fieid/fieidList"
+                            <a data-url="/order/orderList"
                                data-id="1111"
                                data-title="预约信息"
                                class="site-demo-active"
