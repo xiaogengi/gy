@@ -11,6 +11,7 @@
 
 
 <script src="/layui.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
 
     layui.use('table', function(){
@@ -24,9 +25,9 @@
             ,url: '/order/queryAllOrder' //数据接口
             ,page: false //开启分页
             ,cols: [[ //表头
-                 {field: 'id', title: 'ID', fixed: 'left'}
-                ,{field: 'startTime', title: '预约开始时间'}
-                ,{field: 'endTime', title: '预约结束时间'}
+                 //{field: 'id', title: 'ID', fixed: 'left'},
+                {field: 'userName', title: '用户姓名'}
+                ,{field: 'fieidName', title: '场地名称'}
                 ,{field: 'gyDate', title: '预约日期'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
                 // ,{field: '', title: '性别', width:80, sort: true}
@@ -43,22 +44,71 @@
         table.on('tool(test)', function(obj){
             switch(obj.event){
                 case 'edit':
-                    updateFieid(obj.data);
+                    updateOrder(obj.data);
                     break;
                 case 'del':
-                    deleteFieid(obj.data);
+                    deleteOrder(obj.data);
+                    break;
+                case 'rootMaa':
+                    deleteOrder(obj.data);
+                    break;
+                case 'maa':
+                    alert("请联系管理员取消预约");
                     break;
             }
         });
 
 
-        function updateFieid(data) {
-            alert(data.id);
+        /**
+         *  修改预约信息
+         */
+        function updateOrder(data) {
+            layer.open({
+                title : '编辑预约信息',
+                type : 2,
+                area : [ '62%', '80%' ],
+                maxmin : true,
+                shadeClose : true,
+                content : '/order/queryOrderById?id='+data.id,
+                shade : 0, // 不显示遮罩
+
+                success : function(layero, index) {
+                    layer.iframeAuto(index);
+                    console.log(data)
+                }
+            });
         }
 
 
-        function deleteFieid(data) {
+        /**
+         * 删除预约信息
+         * @param data
+         */
+        function deleteOrder(data) {
+            layer.confirm('你确定要删除预约信息？', {
+                btn: ['YES','NO'] //按钮
+            }, function(index){
+                layer.close(index);
 
+                $.ajax({
+                    url:'/order/deleteOrderById',
+                    type:'post',
+                    data:{id : data.id},
+                    success:function (response) {
+                        if(0 == response){
+                            layer.error("DELETE ERROR");
+                        }else{
+                            table.reload("orderList");
+                            layer.msg("DELETE SUCCESS");
+                        }
+                    },error:function () {
+                        layer.error("SYSTEM ERROR !!!");
+                    }
+                });
+
+            }, function(){
+                layer.close();
+            });
         }
 
     });
@@ -68,8 +118,13 @@
 </script>
 
 <script type="text/html" id="barDemo">
+    {{# if(d.type == 1){ }}
     <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="rootMaa">取消预约</a>
+    {{# } else { }}
+    <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="maa">取消预约</a>
+    {{# } }}
 </script>
 
 </body>

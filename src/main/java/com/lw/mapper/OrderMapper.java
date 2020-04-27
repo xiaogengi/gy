@@ -9,17 +9,27 @@ import java.util.List;
 public interface OrderMapper {
 
 
-    @Select("select * from `order`")
+    @Select("select r.*,u.user_name ,u.user_type type ,f.`name` as fieid_name from `order` r, fieid f, `user` u where r.user_id = u.user_id and r.fieid = f.id")
     List<Order> queryAllOrder();
 
 
+    @Select("select r.*,u.user_name ,u.user_type type ,f.`name` as fieid_name from `order` r, fieid f, `user` u where r.user_id = u.user_id and r.fieid = f.id and u.user_id= #{id}")
+    List<Order> queryAllOrderById(@Param("id") String userId);
 
-    @Insert("insert into `order` (user_id, fieid, start_time, end_time, gy_date) " +
+
+
+    @Insert("insert into `order` (user_id, fieid, gy_date) " +
             "values" +
-            " (#{param.userId}, #{param.fieid}, #{param.startTime}, #{param.endTime}, #{param.gyDate})")
+            " (#{param.userId}, #{param.fieid}, #{param.gyDate})")
     int saveOrder(@Param("param") Order param);
 
 
     @Delete("delete from `order` where id = #{id}")
     int deleteOrderById(@Param("id") Integer id);
+
+    @Select("select * from `order` where id = #{id}")
+    Order queryOrderById(@Param("id") Integer id);
+
+    @Update("update `order` set gy_date = #{param.gyDate} where id = #{param.id}")
+    int updateOrder(@Param("param") Order param);
 }

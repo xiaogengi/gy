@@ -7,17 +7,18 @@ import com.lw.pojo.User;
 import com.lw.pojo.dto.UpdateFieidDTO;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface FieidServer {
 
-    JSONObject queryAllFieid();
+    JSONObject queryAllFieid(HttpServletRequest request);
 
     int saveFieid(Fieid param);
 
     int deleteFieidById(Integer id);
 
-    ModelAndView queryFieidById(Integer id);
+    ModelAndView queryFieidById(Integer id,Integer type);
 
     int updateFieidById(UpdateFieidDTO param);
 }

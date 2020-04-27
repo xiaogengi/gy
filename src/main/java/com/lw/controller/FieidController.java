@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @RestController
 @RequestMapping("fieid")
@@ -34,8 +36,8 @@ public class FieidController {
      * @return
      */
     @RequestMapping("queryAllFieid")
-    public JSONObject queryAllFieid(){
-        return fieidServer.queryAllFieid();
+    public JSONObject queryAllFieid(HttpServletRequest request){
+        return fieidServer.queryAllFieid(request);
     }
 
 
@@ -52,7 +54,14 @@ public class FieidController {
      */
     @RequestMapping("queryFieidById")
     public ModelAndView queryFieidById(Integer id){
-        return fieidServer.queryFieidById(id);
+        return fieidServer.queryFieidById(id,1);
+    }
+    /**
+     *  预约回显场地信息
+     */
+    @RequestMapping("maaQueryFieidById")
+    public ModelAndView maaQueryFieidById(Integer id){
+        return fieidServer.queryFieidById(id,2);
     }
 
     @RequestMapping("updateFieid")
@@ -68,6 +77,15 @@ public class FieidController {
     public ModelAndView fieidList(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/fieid/fieidList");
+        return modelAndView;
+    }
+    /**
+     * 打开 field add 主页面
+     */
+    @RequestMapping("fieidAdd")
+    public ModelAndView fieidAdd(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/fieid/addFieid");
         return modelAndView;
     }
 

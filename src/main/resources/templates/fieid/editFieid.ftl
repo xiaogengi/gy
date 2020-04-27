@@ -22,6 +22,14 @@
         </div>
     </div>
 
+   <div class="layui-form-item">
+        <label class="layui-form-label">场地开放时间段</label>
+        <div class="layui-input-block">
+            <input type="Time" id = "startTime" name="time" lay-verify="required" lay-reqtext="场地开放时间段是必填项，不可为空" placeholder="请输入" value="${fieid.startTime}" autocomplete="off" class="layui-input">
+            <input type="Time" id = "endTime" name="time" lay-verify="required" lay-reqtext="场地结束时间段是必填项，不可为空" placeholder="请输入" value="${fieid.endTime}" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
 
     <div class="layui-form-item">
         <div class="layui-input-block">
@@ -42,24 +50,31 @@
     function update() {
         var id = $("#id").val();
         var name = $("#name").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
         $.ajax({
             url:'/fieid/updateFieid',
             type:'post',
-            data:{id : id, name : name},
+            data:{id : id, name : name, startTime : startTime,endTime : endTime},
             success:function (response) {
                 if(0 == response){
-                    layer.error("UPDATE ERROR");
+                    alert("UPDATE ERROR");
+                }else if(400 == response){
+                    alert("时间段格式不正确！！！ 正确格式事例： 12:00 - 18:00");
                 }else{
-                    layer.msg("UPDATE SUCCESS");
+                    alert("UPDATE SUCCESS");
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);
                     parent.location.reload();
                 }
             },error:function () {
-                layer.error("SYSTEM ERROR !!!");
+                alert("SYSTEM ERROR !!!");
             }
         });
     }
+
+
+
 
 
 </script>

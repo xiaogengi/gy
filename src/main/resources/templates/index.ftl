@@ -41,7 +41,18 @@
                                href="javascript:;"
                                data-type="tabAdd">场地信息</a>
                         </dd>
+
+
+                        <dd>
+                            <a data-url="/fieid/fieidAdd"
+                               data-id="0002"
+                               data-title="添加场地信息"
+                               class="site-demo-active"
+                               href="javascript:;"
+                               data-type="tabAdd">添加场地信息</a>
+                        </dd>
                     </dl>
+
                 </li>
 
                 <li class="layui-nav-item">

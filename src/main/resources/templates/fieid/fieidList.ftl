@@ -24,8 +24,9 @@
             ,url: '/fieid/queryAllFieid' //数据接口
             ,page: false //开启分页
             ,cols: [[ //表头
-                 {field: 'id', title: 'ID', fixed: 'left'}
-                ,{field: 'name', title: '场地名称'}
+                 //{field: 'id', title: 'ID', fixed: 'left'},
+                {field: 'name', title: '场地名称'}
+                ,{field: 'time', title: '开放时间段'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
                 // ,{field: '', title: '性别', width:80, sort: true}
                 // ,{field: 'city', title: '城市', width:80}
@@ -46,9 +47,33 @@
                 case 'del':
                     deleteFieid(obj.data);
                     break;
+                case 'maa':
+                    maaFieid(obj.data);
+                    break;
             }
         });
 
+        /**
+         * 预约场地
+         */
+        function maaFieid(data) {
+
+            layer.open({
+                title : '预约场地',
+                type : 2,
+                area : [ '62%', '80%' ],
+                maxmin : true,
+                shadeClose : true,
+                content : '/fieid/maaQueryFieidById?id='+data.id,
+                shade : 0, // 不显示遮罩
+
+                success : function(layero, index) {
+                    layer.iframeAuto(index);
+                    console.log(data)
+                }
+            });
+
+        }
 
         /**
          * 修改场地信息
@@ -118,8 +143,11 @@
 </script>
 
 <script type="text/html" id="barDemo">
+    {{# if(d.type == 1){ }}
     <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    {{# } }}
+    <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="maa">预约</a>
 </script>
 
 </body>

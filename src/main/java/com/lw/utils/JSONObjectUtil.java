@@ -17,4 +17,11 @@ public class JSONObjectUtil {
         return jsonObject;
     }
 
+
+    public static JSONObject jsonBuildResult(JSONObject param, int code, String msg){
+        param.put("code", code);
+        param.put("msg",msg);
+        return param;
+    }
+
 }

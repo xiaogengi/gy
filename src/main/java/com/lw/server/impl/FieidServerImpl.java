@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -22,9 +23,10 @@ public class FieidServerImpl implements FieidServer {
     private FieidMapper fieidMapper;
 
     @Override
-    public JSONObject queryAllFieid() {
+    public JSONObject queryAllFieid(HttpServletRequest request) {
         try {
-            List<Fieid> fieids = fieidMapper.queryAllFieid();
+            String userId = (String) request.getSession().getAttribute("userId");
+            List<Fieid> fieids = fieidMapper.queryAllFieid(userId);
             return JSONObjectUtil.jsonUtil(fieids);
         } catch (Exception e){
             e.printStackTrace();
@@ -60,12 +62,16 @@ public class FieidServerImpl implements FieidServer {
     }
 
     @Override
-    public ModelAndView queryFieidById(Integer id) {
+    public ModelAndView queryFieidById(Integer id,Integer type) {
         ModelAndView modelAndView = new ModelAndView();
 
         try {
             modelAndView.addObject("fieid", fieidMapper.queryFieidById(id));
-            modelAndView.setViewName("/fieid/editFieid");
+            if(1 == type){
+                modelAndView.setViewName("/fieid/editFieid");
+            }else{
+                modelAndView.setViewName("/fieid/maa");
+            }
             return modelAndView;
         } catch (Exception e){
             e.printStackTrace();
@@ -83,6 +89,9 @@ public class FieidServerImpl implements FieidServer {
             return 0;
         }
     }
+
+
+
 
 
 }

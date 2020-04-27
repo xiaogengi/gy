@@ -11,13 +11,13 @@ import java.util.List;
 public interface FieidMapper {
 
 
-    @Select("select * from fieid")
-    List<Fieid> queryAllFieid();
+    @Select("select f.*,u.user_type as type, concat(f.start_time,  ' - ' ,f.end_time) as time from fieid f,`user` u where u.user_id = #{userId}")
+    List<Fieid> queryAllFieid(@Param("userId") String userId);
 
 
-    @Insert("insert into fieid (name, status) " +
+    @Insert("insert into fieid (name, status, start_time, end_time) " +
             "values" +
-            " (#{param.name}, #{param.status})")
+            " (#{param.name}, #{param.status}, #{param.startTime}, #{param.endTime})")
     int saveFieid(@Param("param") Fieid param);
 
 
@@ -29,6 +29,6 @@ public interface FieidMapper {
     Fieid queryFieidById(@Param("id") Integer id);
 
 
-    @Update("update fieid set name = #{param.name} where id = #{param.id}")
+    @Update("update fieid set name = #{param.name}, start_time=#{param.startTime},end_time=#{param.endTime} where id = #{param.id}")
     int updateFieidById(@Param("param") UpdateFieidDTO param);
 }

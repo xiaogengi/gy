@@ -8,9 +8,19 @@ public class Order {
     private Integer id;
     private Integer userId;
     private Integer fieid;
-    private String startTime; //hh:ss
-    private String endTime;   //hh:ss
     private String gyDate;    //yyyy-mm-ss
+
+    private String userName;
+    private String fieidName;
+    private Integer type;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public Integer getId() {
         return id;
@@ -36,21 +46,6 @@ public class Order {
         this.fieid = fieid;
     }
 
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
 
     public String getGyDate() {
         return gyDate;
@@ -58,5 +53,21 @@ public class Order {
 
     public void setGyDate(String gyDate) {
         this.gyDate = gyDate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFieidName() {
+        return fieidName;
+    }
+
+    public void setFieidName(String fieidName) {
+        this.fieidName = fieidName;
     }
 }
