@@ -30,4 +30,7 @@ public interface UserMapper {
             "values" +
             " (#{param.userName}, #{param.userAccount}, #{param.userPwd}, #{param.userType})")
     int register(@Param("param") RegisterDTO param);
+
+    @Update("update user set user_type = #{type} where user_id = #{id}")
+    int updateUserRoot(@Param("id") Integer id,@Param("type") Integer type);
 }

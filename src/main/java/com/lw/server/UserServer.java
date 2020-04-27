@@ -1,15 +1,16 @@
 package com.lw.server;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lw.pojo.User;
 
-import java.util.List;
 
 public interface UserServer {
 
-    List<User> queryAllUser();
+    JSONObject queryAllUser();
 
     int saveUser(User param);
 
     int deleteUserById(Integer id);
 
+    int updateUserRoot(Integer id, Integer type);
 }

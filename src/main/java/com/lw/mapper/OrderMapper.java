@@ -9,7 +9,7 @@ import java.util.List;
 public interface OrderMapper {
 
 
-    @Select("select r.*,u.user_name ,u.user_type type ,f.`name` as fieid_name from `order` r, fieid f, `user` u where r.user_id = u.user_id and r.fieid = f.id")
+    @Select("select r.*,u.user_name ,u.user_type type1 ,f.`name` as fieid_name from `order` r, fieid f, `user` u where r.user_id = u.user_id and r.fieid = f.id")
     List<Order> queryAllOrder();
 
 

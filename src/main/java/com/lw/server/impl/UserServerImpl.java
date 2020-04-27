@@ -1,15 +1,16 @@
 package com.lw.server.impl;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.lw.mapper.UserMapper;
 import com.lw.pojo.User;
+import com.lw.public_parameter.PublicParameter;
 import com.lw.server.UserServer;
 import com.lw.utils.AccountUtil;
+import com.lw.utils.JSONObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class UserServerImpl implements UserServer {
@@ -19,12 +20,12 @@ public class UserServerImpl implements UserServer {
     private UserMapper userMapper;
 
     @Override
-    public List<User> queryAllUser() {
+    public JSONObject queryAllUser() {
         try {
-            return userMapper.queryAllUser();
+            return JSONObjectUtil.jsonUtil(userMapper.queryAllUser());
         } catch (Exception e){
             e.printStackTrace();
-            return new ArrayList<>();
+            return PublicParameter.JSON_OBJECT;
         }
     }
 
@@ -59,6 +60,18 @@ public class UserServerImpl implements UserServer {
         try {
             return userMapper.deleteUserById(id);
         }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public int updateUserRoot(Integer id, Integer type) {
+        try {
+            type = type==1?2:1;
+            System.err.println("id = " + id + " ||||||| type = " + type);
+            return userMapper.updateUserRoot(id, type);
+        } catch (Exception e){
             e.printStackTrace();
             return 0;
         }

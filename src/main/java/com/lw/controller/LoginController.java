@@ -31,6 +31,22 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping("onLogin")
+    public ModelAndView onLogin(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            request.getSession().removeAttribute("userId");
+            request.getSession().removeAttribute("userType");
+            request.getSession().removeAttribute("userName");
+            modelAndView.setViewName("/login/");
+            return modelAndView;
+        } catch (Exception e){
+            modelAndView.setViewName("/error/error");
+            return modelAndView;
+        }
+
+    }
+
     @RequestMapping("testSession")
     public void testSession(String userId, HttpServletRequest request){
         request.getSession().setAttribute("userId",userId);

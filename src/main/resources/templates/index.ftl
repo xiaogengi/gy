@@ -8,21 +8,27 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">体育馆预约 后台布局</div>
+            <div class="layui-logo">
+                <center>体育馆预约 后台布局</center>
 
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
-        </ul>
+                <ul class="layui-nav layui-layout-right">
+                    <li>
+                       <#-- <a href="javascript:;">
+                            <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                            贤心
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="">基本资料</a></dd>
+                            <dd><a href="">安全设置</a></dd>
+                        </dl>-->
+
+                        欢迎 ${name!} ！
+                        <a href="/login/onLogin"><font size="4" color="#7fff00">退出登录</font></a>
+                    </li>
+                </ul>
+
+            </div>
+
     </div>
 
     <div class="layui-side layui-bg-black">
@@ -42,7 +48,7 @@
                                data-type="tabAdd">场地信息</a>
                         </dd>
 
-
+                <#if type == "1">
                         <dd>
                             <a data-url="/fieid/fieidAdd"
                                data-id="0002"
@@ -52,7 +58,7 @@
                                data-type="tabAdd">添加场地信息</a>
                         </dd>
                     </dl>
-
+                </#if>
                 </li>
 
                 <li class="layui-nav-item">
@@ -68,6 +74,22 @@
                         </dd>
                     </dl>
                 </li>
+
+                <#if type == "1">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">用户管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a data-url="/user/userList"
+                                   data-id="3333"
+                                   data-title="用户信息"
+                                   class="site-demo-active"
+                                   href="javascript:;"
+                                   data-type="tabAdd">用户信息</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </#if>
 
 
             </ul>

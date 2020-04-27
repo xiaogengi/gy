@@ -1,7 +1,6 @@
 package com.lw.mapper;
 
 import com.lw.pojo.Fieid;
-import com.lw.pojo.User;
 import com.lw.pojo.dto.UpdateFieidDTO;
 import org.apache.ibatis.annotations.*;
 

@@ -2,6 +2,7 @@ package com.lw.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,16 +11,25 @@ public class Controller {
 
 
     @RequestMapping("/")
-    public String index(HttpServletRequest request){
+    public ModelAndView index(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
         try {
             String userId =(String) request.getSession().getAttribute("userId");
+
             if("".equals(userId) || userId == null){
-                return "/login/login";
+                modelAndView.setViewName("/login/login");
+                return modelAndView;
             }
-            return "/index";
+            String userType =(String) request.getSession().getAttribute("userType");
+            String userName =(String) request.getSession().getAttribute("userName");
+            modelAndView.addObject("type",userType);
+            modelAndView.addObject("name",userName);
+            modelAndView.setViewName("/index");
+            return modelAndView;
         } catch (Exception e){
             e.printStackTrace();
-            return "/login/login";
+            modelAndView.setViewName("/login/login");
+            return modelAndView;
         }
     }
 

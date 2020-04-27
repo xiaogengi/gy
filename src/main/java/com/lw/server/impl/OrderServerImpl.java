@@ -55,6 +55,9 @@ public class OrderServerImpl implements OrderServer {
             List<Order> orders = null;
             if("1".equals(type) || type.equals(1)){
                 orders = orderMapper.queryAllOrder();
+                for (int i = 0; i < orders.size(); i++) {
+                    orders.get(i).setType(1);
+                }
             }else{
                 String userId = request.getSession().getAttribute("userId").toString();
                 orders = orderMapper.queryAllOrderById(userId);

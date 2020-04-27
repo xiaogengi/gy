@@ -14,6 +14,16 @@ public class Order {
     private String fieidName;
     private Integer type;
 
+    private Integer type1;
+
+    public Integer getType1() {
+        return type1;
+    }
+
+    public void setType1(Integer type1) {
+        this.type1 = type1;
+    }
+
     public Integer getType() {
         return type;
     }

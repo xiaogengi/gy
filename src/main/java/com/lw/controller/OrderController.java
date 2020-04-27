@@ -2,17 +2,13 @@ package com.lw.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lw.pojo.Order;
-import com.lw.pojo.User;
-import com.lw.server.FieidServer;
 import com.lw.server.OrderServer;
-import com.sun.imageio.plugins.common.I18N;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @RequestMapping("order")
 @RestController

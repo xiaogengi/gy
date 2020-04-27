@@ -37,6 +37,7 @@ public class LoginServerImpl implements LoginServer {
 
             request.getSession().setAttribute("userId", String.valueOf(user.getUserId()));
             request.getSession().setAttribute("userType", String.valueOf(user.getUserType()));
+            request.getSession().setAttribute("userName", user.getUserName());
 
             result =  JSONObjectUtil.jsonBuildResult(result, 200, "登陆成功");
             result.put("userType", user.getUserType() == 1? "管理员": "用户");

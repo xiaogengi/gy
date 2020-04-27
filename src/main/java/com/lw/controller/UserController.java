@@ -1,6 +1,7 @@
 package com.lw.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.lw.pojo.User;
 import com.lw.server.UserServer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("queryAllUser")
-    public List<User> queryAllUser(){
+    public JSONObject queryAllUser(){
         return userServer.queryAllUser();
     }
 
@@ -44,6 +45,13 @@ public class UserController {
         return userServer.deleteUserById(id);
     }
 
+    /**
+     *  更新用户类型
+     */
+    @RequestMapping("updateUserRoot")
+    public int updateUserRoot(Integer id, Integer type){
+        return userServer.updateUserRoot(id,type);
+    }
 
     /**
      * 打开 user 主页面

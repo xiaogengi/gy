@@ -119,11 +119,11 @@
 
 <script type="text/html" id="barDemo">
     {{# if(d.type == 1){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-    <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="rootMaa">取消预约</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="rootMaa">取消预约</a>
     {{# } else { }}
-    <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="maa">取消预约</a>
+         <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="maa">取消预约</a>
     {{# } }}
 </script>
 

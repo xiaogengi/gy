@@ -13,6 +13,16 @@ public class User implements Serializable {
     private String userPwd;
     private Integer userType;
 
+    public String getUserTypeStr(){
+        if(userType != null && userType == 1){
+            return "管理员";
+        }else if(userType == 2){
+            return "普通用户";
+        }else{
+            return "";
+        }
+    }
+
 
     public Integer getUserId() {
         return userId;
