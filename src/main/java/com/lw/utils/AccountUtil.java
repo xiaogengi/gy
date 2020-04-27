@@ -17,7 +17,6 @@ import java.util.List;
 @Component
 public class AccountUtil implements InitializingBean {
 
-
     @Autowired
     private UserMapper userMapper;
 
@@ -28,7 +27,6 @@ public class AccountUtil implements InitializingBean {
         ACCOUNT_LIST = userMapper.queryAllUserAccount();
     }
 
-    // todo 注册时候加
     public void addAccount(String account){
         ACCOUNT_LIST.add(account);
     }
