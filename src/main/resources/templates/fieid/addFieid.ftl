@@ -47,7 +47,14 @@
         var name = $("#name").val();
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
-        var imgUrl = $("#imgUrl")[0].files[0];
+
+        var imgUrl = document.getElementById("imgUrl").files;
+        var data = new FormData();
+        data.append("file", imgUrl[0]);
+        data.append("name", name);
+        data.append("startTime", startTime);
+        data.append("endTime", endTime);
+
         if(imgUrl == null || imgUrl == ''){
             alert("场地图片不可为空！");
             return;
@@ -57,7 +64,7 @@
             type:'post',
             processData: false,   // jQuery不要去处理发送的数据
             contentType: false,   // jQuery不要去设置Content-Type请求头
-            data:{name : name, startTime : startTime,endTime : endTime, file : imgUrl},
+            data: data,
             success:function (response) {
                 if(0 == response){
                     alert("SAVE ERROR");
