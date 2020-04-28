@@ -8,13 +8,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class FtlConfig extends WebMvcConfigurerAdapter {
 
-    final static String URL = "/File/**";
+    final static String URL = "/getFile/**";
 
 
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-       registry.addResourceHandler(URL).addResourceLocations(PublicParameter.IMG_URL);
+       registry.addResourceHandler(URL).addResourceLocations("file:" + PublicParameter.IMG_URL);
     }
 
 

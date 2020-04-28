@@ -53,7 +53,7 @@ public class UploadUtil {
                 e.printStackTrace();
             }
         }
-        return filePath;
+        return fileName;
     }
 
 }

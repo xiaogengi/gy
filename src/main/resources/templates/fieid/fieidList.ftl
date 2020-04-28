@@ -27,6 +27,7 @@
                  //{field: 'id', title: 'ID', fixed: 'left'},
                 {field: 'name', title: '场地名称'}
                 ,{field: 'time', title: '开放时间段'}
+                ,{field: 'picture', title: '场地', width: 100,height:100, templet:'<div><img src="/getFile/{{ d.imgUrl }}"></div>'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
                 // ,{field: '', title: '性别', width:80, sort: true}
                 // ,{field: 'city', title: '城市', width:80}

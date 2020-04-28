@@ -45,10 +45,11 @@ public class FieidServerImpl implements FieidServer {
     @Override
     public int saveFieid(Fieid param) {
         try {
-            String s = UploadUtil.downloadFileImg(param.getFile(), PublicParameter.IMG_URL);
-            System.out.println(s);
-            return 1;
-            //return fieidMapper.saveFieid(param);
+            String imgUrl = UploadUtil.downloadFileImg(param.getFile(), PublicParameter.IMG_URL);
+            param.setImgUrl(imgUrl);
+            //System.out.println(imgUrl);
+            //return 1;
+            return fieidMapper.saveFieid(param);
         } catch (Exception e){
             e.printStackTrace();
             return 0;
