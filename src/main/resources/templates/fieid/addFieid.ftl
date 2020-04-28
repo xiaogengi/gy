@@ -23,6 +23,13 @@
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">场地图片</label>
+        <div class="layui-input-block">
+            <input type="file" id = "imgUrl">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
         <div class="layui-input-block">
             <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" onclick="save()">立即提交</button>
 <#--
@@ -40,10 +47,17 @@
         var name = $("#name").val();
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
+        var imgUrl = $("#imgUrl")[0].files[0];
+        if(imgUrl == null || imgUrl == ''){
+            alert("场地图片不可为空！");
+            return;
+        }
         $.ajax({
             url:'/fieid/saveFieid',
             type:'post',
-            data:{name : name, startTime : startTime,endTime : endTime},
+            processData: false,   // jQuery不要去处理发送的数据
+            contentType: false,   // jQuery不要去设置Content-Type请求头
+            data:{name : name, startTime : startTime,endTime : endTime, file : imgUrl},
             success:function (response) {
                 if(0 == response){
                     alert("SAVE ERROR");

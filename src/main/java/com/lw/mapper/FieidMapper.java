@@ -14,9 +14,9 @@ public interface FieidMapper {
     List<Fieid> queryAllFieid(@Param("userId") String userId);
 
 
-    @Insert("insert into fieid (name, status, start_time, end_time) " +
+    @Insert("insert into fieid (name, status, start_time, end_time, img_url) " +
             "values" +
-            " (#{param.name}, #{param.status}, #{param.startTime}, #{param.endTime})")
+            " (#{param.name}, #{param.status}, #{param.startTime}, #{param.endTime}, #{param.imgUrl})")
     int saveFieid(@Param("param") Fieid param);
 
 

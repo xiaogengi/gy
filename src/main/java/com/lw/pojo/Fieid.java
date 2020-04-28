@@ -1,6 +1,8 @@
 package com.lw.pojo;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * 场地pojo
  */
@@ -10,6 +12,18 @@ public class Fieid {
     private String name;
     private Integer status = 0;
     private String time;
+
+    private String imgUrl;
+
+    private MultipartFile file;
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
 
     private String startTime;
     private String endTime;
@@ -70,5 +84,13 @@ public class Fieid {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

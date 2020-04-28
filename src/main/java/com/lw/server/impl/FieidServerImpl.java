@@ -8,6 +8,7 @@ import com.lw.pojo.dto.UpdateFieidDTO;
 import com.lw.public_parameter.PublicParameter;
 import com.lw.server.FieidServer;
 import com.lw.utils.JSONObjectUtil;
+import com.lw.utils.UploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,7 +45,10 @@ public class FieidServerImpl implements FieidServer {
     @Override
     public int saveFieid(Fieid param) {
         try {
-            return fieidMapper.saveFieid(param);
+            String s = UploadUtil.downloadFileImg(param.getFile(), PublicParameter.IMG_URL);
+            System.out.println(s);
+            return 1;
+            //return fieidMapper.saveFieid(param);
         } catch (Exception e){
             e.printStackTrace();
             return 0;
