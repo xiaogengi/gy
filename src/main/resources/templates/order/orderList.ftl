@@ -28,6 +28,8 @@
                  //{field: 'id', title: 'ID', fixed: 'left'},
                 {field: 'userName', title: '用户姓名'}
                 ,{field: 'fieidName', title: '场地名称'}
+                ,{field: 'startTime', title: '场地预约开始时间'}
+                ,{field: 'endTime', title: '场地预约结束时间'}
                 ,{field: 'gyDate', title: '预约日期'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
                 // ,{field: '', title: '性别', width:80, sort: true}

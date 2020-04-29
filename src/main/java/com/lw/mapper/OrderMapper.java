@@ -18,9 +18,9 @@ public interface OrderMapper {
 
 
 
-    @Insert("insert into `order` (user_id, fieid, gy_date) " +
+    @Insert("insert into `order` (user_id, fieid, gy_date, start_time, end_time) " +
             "values" +
-            " (#{param.userId}, #{param.fieid}, #{param.gyDate})")
+            " (#{param.userId}, #{param.fieid}, #{param.gyDate},#{param.startTime},#{param.endTime})")
     int saveOrder(@Param("param") Order param);
 
 

@@ -12,7 +12,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">场地名称</label>
         <div class="layui-input-block">
-            <input type="text" id = "name" name="name" lay-verify="required" lay-reqtext="场地名称是必填项，不可为空" placeholder="请输入" value="${fieid.name}" autocomplete="off" class="layui-input">
+            ${fieid.name}
         </div>
     </div>
 
@@ -20,6 +20,15 @@
         <label class="layui-form-label">预约日期</label>
         <div class="layui-input-inline">
             <input type="date" id = "date" class="layui-input" id="test22" placeholder="yyyy-MM-dd">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">场地预约时间</label>
+        <div class="layui-input-block">
+            <input type="Time" id = "startTime" name="time" lay-verify="required" lay-reqtext="场地开放时间段是必填项，不可为空" placeholder="请输入" autocomplete="off" class="layui-input">
+            <input type="Time" id = "endTime" name="time" lay-verify="required" lay-reqtext="场地结束时间段是必填项，不可为空" placeholder="请输入"  autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -58,11 +67,13 @@
     function saveOrder() {
         var id = $("#id").val();
         var date = $("#date").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
 
         $.ajax({
             url:'/order/saveOrder',
             type:'post',
-            data:{fieid : id, gyDate : date},
+            data:{fieid : id, gyDate : date, startTime : startTime, endTime : endTime},
             success:function (response) {
                 if(0 == response){
                     alert("预约失败");

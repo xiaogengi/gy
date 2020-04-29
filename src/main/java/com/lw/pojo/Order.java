@@ -9,12 +9,30 @@ public class Order {
     private Integer userId;
     private Integer fieid;
     private String gyDate;    //yyyy-mm-ss
+    private String startTime;
+    private String endTime;
 
     private String userName;
     private String fieidName;
     private Integer type;
 
     private Integer type1;
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
     public Integer getType1() {
         return type1;
