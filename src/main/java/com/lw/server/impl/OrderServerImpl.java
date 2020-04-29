@@ -4,6 +4,7 @@ package com.lw.server.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.lw.mapper.OrderMapper;
 import com.lw.pojo.Order;
+import com.lw.pojo.dto.OrderDTO;
 import com.lw.public_parameter.PublicParameter;
 import com.lw.server.OrderServer;
 import com.lw.utils.JSONObjectUtil;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,24 +51,63 @@ public class OrderServerImpl implements OrderServer {
     }
 
     @Override
-    public JSONObject queryAllOrder(HttpServletRequest request) {
+    public JSONObject queryAllOrder(HttpServletRequest request, OrderDTO orderDTO) {
         try {
+            checkDto(orderDTO);
+            System.err.println(orderDTO);
             String type = request.getSession().getAttribute("userType").toString();
             List<Order> orders = null;
             if("1".equals(type) || type.equals(1)){
-                orders = orderMapper.queryAllOrder();
+                orders = orderMapper.queryAllOrder(orderDTO);
                 for (int i = 0; i < orders.size(); i++) {
                     orders.get(i).setType(1);
                 }
-
             }else{
                 String userId = request.getSession().getAttribute("userId").toString();
-                orders = orderMapper.queryAllOrderById(userId);
+                orders = orderMapper.queryAllOrderById(userId,orderDTO);
             }
+            //时间条件查询
+            if(orderDTO != null && (checkStr(orderDTO.getStartTime()) || checkStr(orderDTO.getEndTime()))){
+                List<Order> objects = new ArrayList<>();
+                for (Order order : orders) {
+                    if(timeFilter(order.getStartTime(), orderDTO.getStartTime(), order.getEndTime(), orderDTO.getEndTime())){
+                        objects.add(order);
+                    }
+                }
+                orders = objects;
+            }
+
             return JSONObjectUtil.jsonUtil(orders);
         } catch (Exception e){
             e.printStackTrace();
             return PublicParameter.JSON_OBJECT;
+        }
+    }
+
+    private static void checkDto(OrderDTO orderDTO) {
+        if(orderDTO == null){
+            return;
+        }
+        if(orderDTO.getUserName() == ""){
+            orderDTO.setUserName(null);
+        }
+        if(orderDTO.getGyDate() == ""){
+            orderDTO.setGyDate(null);
+        }
+        if(orderDTO.getFieidName() == ""){
+            orderDTO.setFieidName(null);
+        }
+    }
+
+    private static boolean checkStr(String param){
+        try {
+            if(param != null && param != ""){
+                return true;
+            }
+            return false;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -114,42 +155,41 @@ public class OrderServerImpl implements OrderServer {
     private static String TIME = "2001-01-01 ";
     private static SimpleDateFormat SIM_DATA_TIME = new SimpleDateFormat("YYYY-MM-dd HH:mm");
 
-    public static boolean checkTimeTest(String startTime, String endTime, String paramTime){
-        try {
-            startTime = TIME+startTime;
-            endTime = TIME+endTime;
-            paramTime = TIME+paramTime;
-            long star = SIM_DATA_TIME.parse(startTime).getTime();
-            long end = SIM_DATA_TIME.parse(endTime).getTime();
-            long param = SIM_DATA_TIME.parse(paramTime).getTime();
-            if(star <= param && end >= param){
-                return true;
-            }
-            return false;
-        } catch (Exception e){
-            return false;
-        }
-    }
-
 
     public static void main(String[] args) {
 
-
-        //       > 12:00
-        //System.out.println(checkTime("12:00", "15:00", "15:01"));;
-        //System.out.println(timeFilter("11:00","","14:00", "15:00"));
-        //System.out.println(checkTime("10:00","9:00","start"));
     }
 
-    public static boolean timeFilter(String startTime, String startParam, String endTime, String endParam){
-        if(startParam != null && startParam != "" && endParam != null && endParam != ""){
-            return checkTime(startTime, startParam, endTime, endParam);
-        }else if(startParam != null && startParam != ""){
-            return checkTime(startTime,startParam, "start");
-        }else if(endParam != null && endParam != ""){
-            return checkTime(endTime, endParam, "end");
+    // 名称 || 用户名 || 日期 筛选
+    public static boolean strFilter(String str, String strParam){
+        try {
+            if(strParam != null && strParam != ""){
+                if(str.equals(strParam)){
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
-        return false;
+    }
+
+    // 时间筛选
+    public static boolean timeFilter(String startTime, String startParam, String endTime, String endParam){
+        try {
+            if(startParam != null && startParam != "" && endParam != null && endParam != ""){
+                return checkTime(startTime, startParam, endTime, endParam);
+            }else if(startParam != null && startParam != ""){
+                return checkTime(startTime,startParam, "start");
+            }else if(endParam != null && endParam != ""){
+                return checkTime(endTime, endParam, "end");
+            }
+            return false;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
     // 12:00 ~ 15:00
     public static boolean checkTime(String startTime, String startParam, String endTime, String endParam){

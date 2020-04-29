@@ -1,6 +1,7 @@
 package com.lw.mapper;
 
 import com.lw.pojo.Fieid;
+import com.lw.pojo.dto.FieidDTO;
 import com.lw.pojo.dto.UpdateFieidDTO;
 import org.apache.ibatis.annotations.*;
 
@@ -10,8 +11,13 @@ import java.util.List;
 public interface FieidMapper {
 
 
-    @Select("select f.*,u.user_type as type, concat(f.start_time,  ' - ' ,f.end_time) as time from fieid f,`user` u where u.user_id = #{userId}")
-    List<Fieid> queryAllFieid(@Param("userId") String userId);
+    @Select("<script>" +
+            "select f.*,u.user_type as type, concat(f.start_time,  ' - ' ,f.end_time) as time from fieid f,`user` u where u.user_id = #{userId}" +
+            "<if test='param.name != null'>" +
+            " and name = #{param.name}" +
+            "</if>" +
+            "</script>")
+    List<Fieid> queryAllFieid(@Param("userId") String userId, @Param("param") FieidDTO dto);
 
 
     @Insert("insert into fieid (name, status, start_time, end_time, img_url) " +

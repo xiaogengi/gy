@@ -2,6 +2,7 @@ package com.lw.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lw.pojo.Fieid;
+import com.lw.pojo.dto.FieidDTO;
 import com.lw.pojo.dto.UpdateFieidDTO;
 import com.lw.server.FieidServer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class FieidController {
      * @return
      */
     @RequestMapping("queryAllFieid")
-    public JSONObject queryAllFieid(HttpServletRequest request){
-        return fieidServer.queryAllFieid(request);
+    public JSONObject queryAllFieid(HttpServletRequest request, FieidDTO dto){
+        return fieidServer.queryAllFieid(request,dto);
     }
 
 

@@ -4,6 +4,7 @@ package com.lw.server.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.lw.mapper.FieidMapper;
 import com.lw.pojo.Fieid;
+import com.lw.pojo.dto.FieidDTO;
 import com.lw.pojo.dto.UpdateFieidDTO;
 import com.lw.public_parameter.PublicParameter;
 import com.lw.server.FieidServer;
@@ -24,10 +25,15 @@ public class FieidServerImpl implements FieidServer {
     private FieidMapper fieidMapper;
 
     @Override
-    public JSONObject queryAllFieid(HttpServletRequest request) {
+    public JSONObject queryAllFieid(HttpServletRequest request, FieidDTO dto) {
         try {
+            if(dto != null){
+                if(dto.getName() == ""){
+                    dto.setName(null);
+                }
+            }
             String userId = (String) request.getSession().getAttribute("userId");
-            List<Fieid> fieids = fieidMapper.queryAllFieid(userId);
+            List<Fieid> fieids = fieidMapper.queryAllFieid(userId,dto);
             return JSONObjectUtil.jsonUtil(fieids);
         } catch (Exception e){
             e.printStackTrace();

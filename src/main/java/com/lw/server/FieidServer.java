@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lw.controller.FieidController;
 import com.lw.pojo.Fieid;
 import com.lw.pojo.User;
+import com.lw.pojo.dto.FieidDTO;
 import com.lw.pojo.dto.UpdateFieidDTO;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 public interface FieidServer {
 
-    JSONObject queryAllFieid(HttpServletRequest request);
+    JSONObject queryAllFieid(HttpServletRequest request, FieidDTO dto);
 
     int saveFieid(Fieid param);
 

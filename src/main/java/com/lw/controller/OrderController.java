@@ -2,8 +2,10 @@ package com.lw.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lw.pojo.Order;
+import com.lw.pojo.dto.OrderDTO;
 import com.lw.server.OrderServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,8 +34,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping("queryAllOrder")
-    public JSONObject queryAllOrder(HttpServletRequest request){
-        return orderServer.queryAllOrder(request);
+    public JSONObject queryAllOrder(OrderDTO orderDTO, HttpServletRequest request){
+        return orderServer.queryAllOrder(request,orderDTO);
     }
 
 

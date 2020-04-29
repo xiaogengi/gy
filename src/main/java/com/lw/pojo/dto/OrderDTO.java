@@ -14,6 +14,17 @@ public class OrderDTO {
     private String gyDate;
     private String userName;
 
+    @Override
+    public String toString() {
+        return "OrderDTO{" +
+                "fieidName='" + fieidName + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", gyDate='" + gyDate + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
+
     public String getFieidName() {
         return fieidName;
     }

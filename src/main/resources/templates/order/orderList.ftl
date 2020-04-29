@@ -6,6 +6,46 @@
     <link rel="stylesheet" href="/css/layui.css">
 </head>
 <body>
+    <form class="layui-form" action="">
+        <div class="layui-inline">
+            <label class="layui-form-label">用户姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" id = "userName" name="userName"  placeholder="请输入用户姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="">场地名称</label>
+            <div class="layui-input-inline">
+                <input type="text" id = "fieidName" name="fieidName"  placeholder="请输入场地名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="">预约日期</label>
+            <div class="layui-input-inline">
+                <input type="date" id = "gyDate" name="gyDate"  autocomplete="off">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">预约开始 or 结束时间</label>
+            <div class="layui-input-inline">
+                <input type="Time" id = "startTime" name="startTime" autocomplete="off" >
+                <input type="Time" id = "endTime" name="endTime" autocomplete="off" >
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <a class="layui-btn" id="searchBtn" lay-submit
+                        lay-filter="formDemo" data-type="reload" style="margin-left: 15px">
+                    <i class="layui-icon layui-icon-search"></i> 查询
+                </a>
+                <#--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+            </div>
+        </div>
+    </form>
     <!-- 预约列表 &ndash;&gt; -->
     <table id="orderList" lay-filter="test" lay-data="{height: 'full-20', cellMinWidth: 80}" ></table>
 
@@ -18,12 +58,20 @@
         var table = layui.table;
 
         //第一个实例
-        table.render({
+        var tableIns =  table.render({
             elem: '#orderList'
+            ,id:'orderId'
             //,height: 'full-200'
             //,toolbar: '#toolbarDemo'
             ,url: '/order/queryAllOrder' //数据接口
             ,page: false //开启分页
+            ,where : {
+                fieidName : '',
+                startTime : '',
+                endTime : '',
+                gyDate : '',
+                userName : ''
+            }
             ,cols: [[ //表头
                  //{field: 'id', title: 'ID', fixed: 'left'},
                 {field: 'userName', title: '用户姓名'}
@@ -41,6 +89,26 @@
                 // ,{field: 'wealth', title: '财富', width: 135, sort: true}
             ]]
         });
+
+        //var $ = layui.$, active = {
+          //  reload: function() {
+                $('#searchBtn').on('click', function() {
+                    table.reload('orderId', {
+                        method : 'get',
+                        where : {
+                                fieidName : $('#fieidName').val(),
+                                startTime : $('#startTime').val(),
+                                endTime : $('#endTime').val(),
+                                gyDate : $('#gyDate').val(),
+                                userName : $('#userName').val()
+                        }
+                    });
+                    //return false;
+                });
+         //   }
+        //}
+
+
 
 
         table.on('tool(test)', function(obj){
